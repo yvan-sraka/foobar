@@ -1,13 +1,24 @@
-name: CI for Merge Queue
+name: Merge Queue Debug
 
 on:
   pull_request:
   merge_group:
-    branches:
-      - '*'
 
 jobs:
-  test:
+  debug-merge-queue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Debug Merge Queue Context
+        run: |
+          echo "GitHub Event Name: ${{ github.event_name }}"
+          echo "Is Merge Group: ${{ github.event.pull_request.merge_queue_entry != null }}"
+          echo "Base Branch: ${{ github.base_ref }}"
+          echo "Head Branch: ${{ github.head_ref }}"
+          
+      - name: Simple Validation
+        run: |
+          echo "Running basic checks"
+          exit 0
