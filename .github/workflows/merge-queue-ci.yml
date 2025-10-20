@@ -1,0 +1,13 @@
+name: CI for Merge Queue
+
+on:
+  pull_request:
+  merge_group:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
